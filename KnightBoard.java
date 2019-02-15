@@ -38,10 +38,9 @@ public class KnightBoard {
   }
   private boolean sh(int r, int c, int mn) {
     if(r < 0 || c < 0 || r >= board.length || c >= board[0].length || board[r][c] != 0) {
-      board[r][c] = 0;
       return false;
     }
-    if(mn >= board.length * board[0].length) {
+    else if(mn >= board.length * board[0].length) {
       return true;
     }
     else {
@@ -55,7 +54,12 @@ public class KnightBoard {
       sh(r - 2, c - 1, mn + 1) || //wnw
       sh(r - 1, c - 2, mn + 1) //nnw
       ) {
-        
+        board[r][c] = mn;
+        return true;
+      }
+      else {
+        board[r][c] = 0;
+        return false;
       }
     }
   }
