@@ -1,7 +1,11 @@
 public class KnightBoard {
   private int[][] board;
+  private int lrc;
+  private int lcc;
   public KnightBoard(int rc, int cc) {
     board = new int[rc][cc];
+    lrc = rc;
+    lcc = cc;
   }
   public String toString() {
     String s = "";
@@ -37,14 +41,14 @@ public class KnightBoard {
     return sh(r, c, 1);
   }
   private boolean sh(int r, int c, int mn) {
-    if(r < 0 || c < 0 || r >= board.length || c >= board[0].length || board[r][c] != 0) {
+    if(r < 0 || c < 0 || r >= board.length || c >= board[0].length || board[r][c] != 0) { //if knight jumps off the board
       return false;
     }
-    else if(mn >= board.length * board[0].length) {
+    else if(mn >= (lrc * lcc)) { //if max num knights reached
       return true;
     }
     else {
-      if(
+      if( //move possible from this spot
       sh(r + 1, c - 2, mn + 1) || //nne
       sh(r + 2, c - 1, mn + 1) || //ene
       sh(r + 2, c + 1, mn + 1) || //ese
@@ -55,9 +59,10 @@ public class KnightBoard {
       sh(r - 1, c - 2, mn + 1) //nnw
       ) {
         board[r][c] = mn;
+        mn++;
         return true;
       }
-      else {
+      else { //move not possible from this spot
         board[r][c] = 0;
         return false;
       }
@@ -74,7 +79,7 @@ public class KnightBoard {
     return false;
   }
   public static void main(String[] args) {
-    KnightBoard test = new KnightBoard(5,5);
+    KnightBoard test = new KnightBoard(6,6);
     System.out.println(test.solve(0,0));
     System.out.println(test);
   }
