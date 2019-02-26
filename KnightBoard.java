@@ -42,8 +42,7 @@ public class KnightBoard {
     return sh(r, c, 1, 0);
   }
   private boolean sh(int r, int c, int mn, int coord) {
-    if(mn >= board.length * board[0].length) { //all knights placed
-      board[r][c] = mn;
+    if(mn > board.length * board[0].length) { //all knights placed
       return true;
     }
     else if(r < 0 || c < 0 || r >= board.length || c >= board[0].length) { //row col out of bounds
@@ -59,6 +58,7 @@ public class KnightBoard {
           return true;
         }
       }
+      board[r][c] = 0;
       return false;
     }
   }
@@ -73,7 +73,7 @@ public class KnightBoard {
     return false;
   }
   public static void main(String[] args) {
-    KnightBoard test = new KnightBoard(5,5);
+    KnightBoard test = new KnightBoard(6,6);
     System.out.println(test.solve(0,0));
     System.out.println(test);
   }
