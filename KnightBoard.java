@@ -2,6 +2,7 @@ public class KnightBoard {
   private int[][] board;
   private int lrc;
   private int lcc;
+  private int[][] moves = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
   public KnightBoard(int rc, int cc) {
     board = new int[rc][cc];
     lrc = rc;
@@ -48,18 +49,8 @@ public class KnightBoard {
       return true;
     }
     else {
-      if( //move possible from this spot
-      sh(r + 1, c - 2, mn + 1) || //nne
-      sh(r + 2, c - 1, mn + 1) || //ene
-      sh(r + 2, c + 1, mn + 1) || //ese
-      sh(r + 1, c + 2, mn + 1) || //sse
-      sh(r - 1, c + 2, mn + 1) || //ssw
-      sh(r - 2, c + 1, mn + 1) || //wsw
-      sh(r - 2, c - 1, mn + 1) || //wnw
-      sh(r - 1, c - 2, mn + 1) //nnw
-      ) {
+      if(true) { //move possible from this spot
         board[r][c] = mn;
-        mn++;
         return true;
       }
       else { //move not possible from this spot
