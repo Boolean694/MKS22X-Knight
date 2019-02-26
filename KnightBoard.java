@@ -39,24 +39,27 @@ public class KnightBoard {
     if(c >= board[0].length) {
       throw new IllegalArgumentException("col param exceeds col dimension");
     }
-    return sh(r, c, 1);
+    return sh(r, c, 1, 0);
   }
-  private boolean sh(int r, int c, int mn) {
-    if(r < 0 || c < 0 || r >= board.length || c >= board[0].length || board[r][c] != 0) { //if knight jumps off the board
-      return false;
-    }
-    else if(mn >= (lrc * lcc)) { //if max num knights reached
+  private boolean sh(int r, int c, int mn, int coord) {
+    if(mn >= board.length * board[0].length) { //all knights placed
+      board[r][c] = mn;
       return true;
     }
-    else {
-      if(true) { //move possible from this spot
-        board[r][c] = mn;
-        return true;
+    else if(r < 0 || c < 0 || r >= board.length || c >= board[0].length) { //row col out of bounds
+      return false;
+    }
+    else if(board[r][c] != 0) { //knight already placed on spot
+      return false;
+    }
+    else { //spot available
+      board[r][c] = mn;
+      for(int q = 0; q < moves.length; q++) {
+        if(sh(r + moves[q][0], c + moves[q][1], mn+1, q)) {
+          return true;
+        }
       }
-      else { //move not possible from this spot
-        board[r][c] = 0;
-        return false;
-      }
+      return false;
     }
   }
   public boolean bnc() {
@@ -70,7 +73,7 @@ public class KnightBoard {
     return false;
   }
   public static void main(String[] args) {
-    KnightBoard test = new KnightBoard(6,6);
+    KnightBoard test = new KnightBoard(5,5);
     System.out.println(test.solve(0,0));
     System.out.println(test);
   }
