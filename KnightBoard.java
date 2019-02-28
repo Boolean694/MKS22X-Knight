@@ -85,7 +85,6 @@ public class KnightBoard {
       return 0;
     }
     else if(mn >= board.length * board[0].length) {
-      board[r][c] = mn;
       return 1;
     }
     else {
@@ -99,13 +98,11 @@ public class KnightBoard {
       csh(r - 2, c + 1, mn + 1) +
       csh(r - 2, c - 1, mn + 1) +
       csh(r - 1, c - 2, mn + 1);
-      if(sum == 0) {
-        board[r][c] = 0;
-      }
+      board[r][c] = 0;
       return sum;
     }
   }
-  public boolean bnc() {
+  public boolean bnc() { //board not clear
     for(int q = 0; q < board.length; q++) {
       for(int w = 0; w < board[q].length; w++) {
         if(board[q][w] != 0) {
